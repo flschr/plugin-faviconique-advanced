@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "title": "Solid (Emoji) Favicon",
+  "description": "You get a favicon.",
+  "fields": [
+    {
+      "field": "params.solid_emoji_favicon_background_color",
+      "label": "Background color",
+      "type": "color"
+    },
+    {
+      "field": "params.solid_emoji_favicon_dark_mode_background_color",
+      "label": "Background color",
+      "type": "color"
+    },
+    {
+      "field": "params.solid_emoji_favicon_emoji",
+      "label": "Emoji (only one)",
+      "type": "string"
+    },
+    {
+      "field": "params.solid_emoji_favicon_dark_mode_emoji",
+      "label": "Emoji (only one)",
+      "type": "string"
+    }
+  ]
+}
