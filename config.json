@@ -1,8 +1,10 @@
 {
   "params": {
     "solid_emoji_favicon_background_color": "#ffffff",
-    "solid_emoji_favicon_background_color": "#000000",
-    "solid_emoji_favicon_emoji": "😇"
-    "solid_emoji_favicon_emoji": "😈"
+    "solid_emoji_favicon_dark_mode_background_color": "#000000",
+    "solid_emoji_favicon_emoji": "😇",
+    "solid_emoji_favicon_dark_mode_emoji": "😈",
+    "solid_emoji_favicon_use_dark_mode": true,
+    "solid_emoji_favicon_use_transparent_background": false
   }
 }
