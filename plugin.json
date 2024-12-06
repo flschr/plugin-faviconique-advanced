@@ -25,12 +25,12 @@
     },
     {
       "field": "params.solid_emoji_favicon_use_dark_mode",
-      "label": "I want dark mode enabled, please",
+      "label": "Enable dark mode, please",
       "type": "boolean"
     },
     {
       "field": "params.solid_emoji_favicon_use_transparent_background",
-      "label": "Use a transparent background for my emoji",
+      "label": "Use transparent background for emoji",
       "type": "boolean"
     }
   ]
