@@ -1,35 +1,35 @@
 {
   "version": "0.1.0",
-  "title": "Solid (Emoji) Favicon",
+  "title": "Faviconique",
   "description": "You get a favicon.",
   "fields": [
     {
-      "field": "params.solid_emoji_favicon_background_color",
+      "field": "params.faviconique_background_color",
       "label": "Background color",
       "type": "color"
     },
     {
-      "field": "params.solid_emoji_favicon_emoji",
+      "field": "params.faviconique_emoji",
       "label": "Emoji (only one)",
       "type": "string"
     },
     {
-      "field": "params.solid_emoji_favicon_dark_mode_background_color",
+      "field": "params.faviconique_dark_background_color",
       "label": "Dark mode background color",
       "type": "color"
     },
     {
-      "field": "params.solid_emoji_favicon_dark_mode_emoji",
+      "field": "params.faviconique_dark_emoji",
       "label": "Dark mode emoji (only one)",
       "type": "string"
     },
     {
-      "field": "params.solid_emoji_favicon_use_dark_mode",
+      "field": "params.faviconique_use_dark_mode",
       "label": "Enable dark mode, please",
       "type": "boolean"
     },
     {
-      "field": "params.solid_emoji_favicon_use_transparent_background",
+      "field": "params.faviconique_use_transparent_background",
       "label": "Use transparent background for emoji",
       "type": "boolean"
     }

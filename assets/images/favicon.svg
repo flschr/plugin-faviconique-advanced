@@ -1,9 +1,9 @@
-{{- $emoji := $.Site.Params.solid_emoji_favicon_emoji -}}
-{{- $dark_mode_emoji := $.Site.Params.solid_emoji_favicon_dark_mode_emoji -}}
-{{- $background_color := $.Site.Params.solid_emoji_favicon_background_color -}}
-{{- $dark_mode_background_color := $.Site.Params.solid_emoji_favicon_dark_mode_background_color -}}
-{{- $use_transparent_background := $.Site.Params.solid_emoji_favicon_use_transparent_background -}}
-{{- $use_dark_mode := $.Site.Params.solid_emoji_favicon_use_dark_mode -}}
+{{- $emoji := $.Site.Params.faviconique_emoji -}}
+{{- $dark_emoji := $.Site.Params.faviconique_dark_emoji -}}
+{{- $background_color := $.Site.Params.faviconique_background_color -}}
+{{- $dark_background_color := $.Site.Params.faviconique_dark_background_color -}}
+{{- $use_transparent_background := $.Site.Params.faviconique_use_transparent_background -}}
+{{- $use_dark_mode := $.Site.Params.faviconique_use_dark_mode -}}
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <style>
     {{- if (ne $use_transparent_background true) | or (eq $emoji "") }}
@@ -17,9 +17,9 @@
     }
 
     @media (prefers-color-scheme: dark) {
-      {{ if (ne $use_transparent_background true) | or (eq $dark_mode_emoji "") -}}
+      {{ if (ne $use_transparent_background true) | or (eq $dark_emoji "") -}}
       svg {
-        background-color: {{ $dark_mode_background_color }};
+        background-color: {{ $dark_background_color }};
       }
       {{- end }}
 
@@ -38,7 +38,7 @@
   </text>
   {{ if eq $use_dark_mode true -}}
   <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="90" id="dark-emoji">
-    {{ $dark_mode_emoji }}
+    {{ $dark_emoji }}
   </text>
   {{- end }}
 </svg>

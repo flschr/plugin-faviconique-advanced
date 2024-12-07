@@ -27,7 +27,7 @@
   <link rel="me" href="https://instagram.com/{{ . }}">
 {{ end }}
 
-{{- $background_color := $.Site.Params.solid_emoji_favicon_background_color -}}
+{{- $background_color := $.Site.Params.faviconique_background_color -}}
 
 {{ with resources.Get "images/favicon.png" }}
   {{ with .Resize (printf "64x64 png %s" $background_color) }}

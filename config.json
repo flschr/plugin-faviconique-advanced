@@ -1,10 +1,10 @@
 {
   "params": {
-    "solid_emoji_favicon_background_color": "#87cefa",
-    "solid_emoji_favicon_dark_mode_background_color": "#00008b",
-    "solid_emoji_favicon_emoji": "🌝",
-    "solid_emoji_favicon_dark_mode_emoji": "🌚",
-    "solid_emoji_favicon_use_dark_mode": true,
-    "solid_emoji_favicon_use_transparent_background": true
+    "faviconique_background_color": "#87cefa",
+    "faviconique_dark_background_color": "#00008b",
+    "faviconique_emoji": "🌝",
+    "faviconique_dark_emoji": "🌚",
+    "faviconique_use_dark_mode": true,
+    "faviconique_use_transparent_background": true
   }
 }
