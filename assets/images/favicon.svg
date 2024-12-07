@@ -1,2 +1,44 @@
 {{- $emoji := $.Site.Params.solid_emoji_favicon_emoji -}}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">{{ $emoji }}</text></svg>
+{{- $dark_mode_emoji := $.Site.Params.solid_emoji_favicon_dark_mode_emoji -}}
+{{- $background_color := $.Site.Params.solid_emoji_favicon_background_color -}}
+{{- $dark_mode_background_color := $.Site.Params.solid_emoji_favicon_dark_mode_background_color -}}
+{{- $use_transparent_background := $.Site.Params.solid_emoji_favicon_use_transparent_background -}}
+{{- $use_dark_mode := $.Site.Params.solid_emoji_favicon_use_dark_mode -}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    {{- if (ne $use_transparent_background true) | or (eq $emoji "") }}
+    svg {
+      background-color: {{ $background_color }};
+    }
+    {{ end -}}
+    {{- if eq $use_dark_mode true }}
+    #dark-emoji {
+      visibility: hidden;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      {{ if (ne $use_transparent_background true) | or (eq $dark_mode_emoji "") -}}
+      svg {
+        background-color: {{ $dark_mode_background_color }};
+      }
+      {{- end }}
+
+      #dark-emoji {
+        visibility: visible;
+      }
+
+      #light-emoji {
+        visibility: hidden;
+      }
+    {{- end }}
+    }
+  </style>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="90" id="light-emoji">
+    {{ $emoji }}
+  </text>
+  {{ if eq $use_dark_mode true -}}
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="90" id="dark-emoji">
+    {{ $dark_mode_emoji }}
+  </text>
+  {{- end }}
+</svg>
