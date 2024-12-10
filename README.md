@@ -1,8 +1,10 @@
 <h1><img src="https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/faviconique.png" width="48" height="48" alt="" align="left">&nbsp;Faviconique</h1>
 
-Give your blog a personal touch with a custom favicon. Choose a solid background color and/or an emoji to represent your blog as a favicon. [See it in action on Sven's blog](https://dahlstrand.net/).
+Give your blog a personal touch with a custom favicon. [See it in action on Sven's blog](https://dahlstrand.net/).
 
 ![](https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/favicon-examples.png)
+
+> Choose a solid background color and/or an emoji to represent your blog as a favicon.
 
 To get updates on this plug-in, [follow @sod on Micro.blog](https://micro.blog/sod).
 
