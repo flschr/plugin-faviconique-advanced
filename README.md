@@ -26,7 +26,7 @@ Ready to give your blog a personal touch? Faviconique is available in the offici
 
 ### Install the plug-in
 
-1. Find [Faviconique in the plug-in directory](https://micro.blog/account/plugins/view/140).
+1. Find [Faviconique in the plug-in directory](https://micro.blog/account/plugins/view/141).
 2. Choose the site you want to install the plug-in to.
 3. Press *Install*.
 4. Congratulations! You've successfully installed the plug-in.
