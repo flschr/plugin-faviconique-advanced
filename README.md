@@ -1,8 +1,8 @@
 # 💅 Faviconique
 
-Give your blog a personal touch with a custom favicon. Choose a solid background color and/or an emoji to represent your blog as a favicon. [See it in action on Sven's blog](https://dahlstrand.net/).
+<img src="https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/faviconique.png" width="64" height="64" alt="" align="left">
 
-<img src="https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/faviconique.png" width="64" height="64" alt="">
+Give your blog a personal touch with a custom favicon. Choose a solid background color and/or an emoji to represent your blog as a favicon. [See it in action on Sven's blog](https://dahlstrand.net/).
 
 ![](https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/favicon-examples.png)
 
