@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "title": "Faviconique",
-  "description": "You get a favicon.",
+  "description": "Give your blog a personal touch with a custom favicon.",
   "fields": [
     {
       "field": "params.faviconique_background_color",
