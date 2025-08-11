@@ -1,13 +1,8 @@
 {
-  "version": "0.0.8",
+  "version": "0.1.0",
   "title": "Faviconique+",
-  "description": "Give your blog a personal touch with a custom favicon, also for Safari :)",
+  "description": "Emoji favicon via EmojiCDN for all browsers.",
   "fields": [
-    {
-      "field": "params.faviconique.background_color",
-      "label": "Background color",
-      "type": "color"
-    },
     {
       "field": "params.faviconique.emoji",
       "label": "Emoji (only one)",
@@ -18,43 +13,11 @@
       "label": "Emoji style (CDN)",
       "type": "select",
       "options": [
-        {
-          "label": "apple",
-          "value": "apple"
-        },
-        {
-          "label": "twitter",
-          "value": "twitter"
-        },
-        {
-          "label": "facebook",
-          "value": "facebook"
-        },
-        {
-          "label": "google",
-          "value": "google"
-        }
+        { "label": "apple", "value": "apple" },
+        { "label": "twitter", "value": "twitter" },
+        { "label": "facebook", "value": "facebook" },
+        { "label": "google", "value": "google" }
       ]
-    },
-    {
-      "field": "params.faviconique.dark_background_color",
-      "label": "Dark mode background color",
-      "type": "color"
-    },
-    {
-      "field": "params.faviconique.dark_emoji",
-      "label": "Dark mode emoji (only one)",
-      "type": "string"
-    },
-    {
-      "field": "params.faviconique.use_dark_mode",
-      "label": "Enable dark mode, please",
-      "type": "boolean"
-    },
-    {
-      "field": "params.faviconique.use_transparent_background",
-      "label": "Use transparent background for emoji",
-      "type": "boolean"
     }
   ]
 }

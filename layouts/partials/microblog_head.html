@@ -1,17 +1,16 @@
 {{- $p := .Site.Params -}}
-{{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) | default "🌝" -}}
+{{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) | default "🌱" -}}
 {{- $style := (or ($p.faviconique.style) ($p.faviconique_style)) | default "apple" -}}
-{{- $cdn := (or ($p.faviconique.cdn) ($p.faviconique_cdn)) | default "https://emojicdn.elk.sh" -}}
-{{- $maskColor := (or ($p.faviconique.maskColor) ($p.faviconique_mask_color)) | default "#000000" -}}
+{{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $v := printf "&v=%d" now.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
 
-<link rel="preconnect" href="{{ $cdn }}">
-<link rel="dns-prefetch" href="{{ $cdn }}">
+<link rel="preconnect" href="{{$cdn}}">
+<link rel="dns-prefetch" href="{{$cdn}}">
 
-<link rel="icon" type="image/png" sizes="16x16" href="{{ $base }}16{{ $v }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ $base }}32{{ $v }}">
-<link rel="icon" type="image/png" sizes="48x48" href="{{ $base }}48{{ $v }}">
-<link rel="icon" type="image/png" sizes="96x96" href="{{ $base }}96{{ $v }}">
-<link rel="shortcut icon" type="image/png" href="{{ $base }}32{{ $v }}">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ $base }}180{{ $v }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{$base}}16{{$v}}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{$base}}32{{$v}}">
+<link rel="icon" type="image/png" sizes="48x48" href="{{$base}}48{{$v}}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{$base}}96{{$v}}">
+<link rel="shortcut icon" type="image/png" href="{{$base}}32{{$v}}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{$base}}180{{$v}}">
