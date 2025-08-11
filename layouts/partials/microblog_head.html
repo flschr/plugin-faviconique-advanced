@@ -20,3 +20,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="{{$base}}512{{$v}}">
 <link rel="shortcut icon" type="image/png" href="{{$base}}32{{$v}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{$base}}180{{$v}}">
+
+{{- with .Site.Title }}
+<meta name="apple-mobile-web-app-title" content="{{ . }}">
+{{- end }}
