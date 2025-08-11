@@ -1,13 +1,3 @@
-{{/* =====================================
-   Faviconique+ — EmojiCDN everywhere
-   Always use PNGs from the emoji CDN in all browsers
-   Params used (with fallbacks):
-     - params.faviconique.emoji or params.faviconique_emoji
-     - params.faviconique.style or params.faviconique_style (default: "apple")
-     - params.faviconique.cdn or params.faviconique_cdn (default: https://emojicdn.elk.sh)
-     - params.faviconique.maskColor or params.faviconique_mask_color (default: #000000)
-   ===================================== */}}
-
 {{- $p := .Site.Params -}}
 {{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) | default "🌝" -}}
 {{- $style := (or ($p.faviconique.style) ($p.faviconique_style)) | default "apple" -}}
@@ -16,17 +6,12 @@
 {{- $v := printf "&v=%d" now.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
 
-{{/* Preconnect to speed up icon fetch */}}
 <link rel="preconnect" href="{{ $cdn }}">
 <link rel="dns-prefetch" href="{{ $cdn }}">
 
-{{/* PNG icons from CDN (all browsers) */}}
 <link rel="icon" type="image/png" sizes="16x16" href="{{ $base }}16{{ $v }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ $base }}32{{ $v }}">
 <link rel="icon" type="image/png" sizes="48x48" href="{{ $base }}48{{ $v }}">
 <link rel="icon" type="image/png" sizes="96x96" href="{{ $base }}96{{ $v }}">
 <link rel="shortcut icon" type="image/png" href="{{ $base }}32{{ $v }}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ $base }}180{{ $v }}">
-
-{{/* Optional: keep mask icon for Safari pinned tabs */}}
-<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="{{ $maskColor }}">
