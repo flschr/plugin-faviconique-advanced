@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "title": "Faviconique+",
   "description": "Give your blog a personal touch with a custom favicon.",
   "fields": [
@@ -36,7 +36,9 @@
     {
       "field": "params.faviconique_use_cdn_safari",
       "label": "Use emoji CDN for Safari only",
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "help": "If enabled, Safari will display the favicon via a PNG from an emoji CDN instead of the default emoji rendering."
     }
   ]
 }

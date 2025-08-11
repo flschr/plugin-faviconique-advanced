@@ -1,11 +1,41 @@
-{{/* Immer normale Faviconique-Links rendern */}}
-<link rel="icon" type="image/png" sizes="16x16" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=16">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=32">
-<link rel="icon" type="image/png" sizes="48x48" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=48">
-<link rel="icon" type="image/png" sizes="96x96" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=96">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=180">
-<link rel="shortcut icon" type="image/png" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=32">
+{{/* =====================
+   Faviconique+ — Head hook
+   Default: Emoji/Solid per plugin (all browsers)
+   Optional: Safari-only CDN PNGs when enabled
+   ===================== */}}
 
+{{- $p := .Site.Params -}}
+{{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) -}}
+{{- $style := (or ($p.faviconique.style) ($p.faviconique_style)) | default "apple" -}}
+{{- $cdn := (or ($p.faviconique.cdn) ($p.faviconique_cdn)) | default "https://emojicdn.elk.sh" -}}
+{{- $maskColor := (or ($p.faviconique.maskColor) ($p.faviconique_mask_color)) | default "#000000" -}}
+{{- $bg := (or $p.faviconique_background_color "transparent") -}}
+{{- $useCdnSafari := or ($p.faviconique.use_cdn_safari) (eq ($p.faviconique_use_cdn_safari) true) -}}
+
+{{/* ---- Default output (keeps normal plugin behavior) ---- */}}
+{{ if $emoji }}
+  {{/* SVG favicon based on the emoji (modern browsers) */}}
+  {{ with resources.Get "images/favicon.svg" | resources.ExecuteAsTemplate "images/favicon.svg" . }}
+    <link rel="icon" href="{{ .RelPermalink }}" sizes="any" type="image/svg+xml">
+  {{ end }}
+  {{/* PNG fallback (64x64) with optional background (Safari still shows PNG if CDN not used) */}}
+  {{ with resources.Get "images/favicon.png" }}
+    {{ with .Resize (printf "64x64 png %s" $bg) }}
+      <link rel="icon" href="{{ .RelPermalink }}" sizes="64x64" type="image/png">
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{/* Solid color only: use base PNG and tint via background color */}}
+  {{ with resources.Get "images/favicon.png" }}
+    {{ with .Resize (printf "64x64 png %s" $bg) }}
+      <link rel="icon" href="{{ .RelPermalink }}" sizes="64x64" type="image/png">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="{{ $maskColor }}">
+
+{{/* ---- Safari-only CDN swap (optional) ---- */}}
 {{ if $useCdnSafari }}
 <script data-cfasync="false" type="text/javascript">
 (function(){
@@ -14,18 +44,18 @@
     var isAppleVendor = navigator.vendor && /Apple/i.test(navigator.vendor);
     var isSafariUA = (/^((?!chrome|android|crios|fxios|edgios).)*safari/i).test(ua);
     var isSafari = isAppleVendor || isSafariUA || (window.safari && window.safari.pushNotification);
-    if (!isSafari) return;
+    if (!isSafari) return; // only Safari
 
     var head = document.head || document.getElementsByTagName('head')[0];
     if (!head) return;
 
-    // Alle bisherigen Icons entfernen
+    // Remove existing icons (keep mask-icon)
     head.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="shortcut icon"]').forEach(function(l){
       head.removeChild(l);
     });
 
     var cacheBuster = '&v={{ now.Unix }}';
-    var base = '{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=';
+    var base = '{{ $cdn }}/{{ $emoji | default "🍋" }}?style={{ $style }}&size=';
 
     function add(rel, sizes, href){
       var link = document.createElement('link');
@@ -36,6 +66,7 @@
       head.appendChild(link);
     }
 
+    // Standard sizes + iOS apple-touch-icon
     add('icon','16x16', base + '16');
     add('icon','32x32', base + '32');
     add('icon','48x48', base + '48');
@@ -43,7 +74,7 @@
     add('shortcut icon','', base + '32');
     add('apple-touch-icon','180x180', base + '180');
   } catch(e) {
-    console && console.warn && console.warn('[faviconique] error', e);
+    if (window.console && console.warn) console.warn('[faviconique] error', e);
   }
 })();
 </script>
