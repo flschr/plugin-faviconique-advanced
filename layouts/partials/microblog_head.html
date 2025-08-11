@@ -1,98 +1,53 @@
-{{ if ne .Kind "home" }}
-  <link rel="alternate" href="{{ "feed.xml" | absURL }}" type="application/rss+xml" title="{{ $.Site.Title }}">
-  <link rel="alternate" href="{{ "feed.json" | absURL }}" type="application/json" title="{{ $.Site.Title }}">
-{{ end }}
-
-{{ range .AlternativeOutputFormats -}}
-  {{ printf `<link rel="%s" href="%s" type="%s" title="%s">` .Rel .Permalink .MediaType.Type $.Site.Title | safeHTML }}
-{{ end -}}
-
-{{ $podcastEpisodeCount := len (where .Site.Pages ".Params.audio_with_metadata" "!=" nil) }}
-{{ if gt $podcastEpisodeCount 0 }}
-  <link rel="alternate" href="{{ "podcast.xml" | absURL }}" type="application/rss+xml" title="Podcast">
-  <link rel="alternate" href="{{ "podcast.json" | absURL }}" type="application/json" title="Podcast">
-{{ end }}
-
-<link rel="me" href="https://micro.blog/{{ .Site.Author.username }}">
-
-{{ with .Site.Params.twitter_username }}
-  <link rel="me" href="https://twitter.com/{{ . }}">
-{{ end }}
-
-{{ with .Site.Params.github_username }}
-  <link rel="me" href="https://github.com/{{ . }}">
-{{ end }}
-
-{{ with .Site.Params.instagram_username }}
-  <link rel="me" href="https://instagram.com/{{ . }}">
-{{ end }}
-
-{{/* Faviconique Advanced: always solid by default; optional Safari-only CDN override */}}
-{{- $emoji := (or (.Site.Params.faviconique.emoji) (.Site.Params.faviconique_emoji)) | default "🍋" -}}
-{{- $style := (or (.Site.Params.faviconique.style) (.Site.Params.faviconique_style)) | default "apple" -}}
-{{- $cdn := (or (.Site.Params.faviconique.cdn) (.Site.Params.faviconique_cdn)) | default "https://emojicdn.elk.sh" -}}
-{{- $maskColor := (or (.Site.Params.faviconique.maskColor) (.Site.Params.faviconique_mask_color)) | default "#000000" -}}
-{{- $background_color := $.Site.Params.faviconique_background_color -}}
-{{- $useCdnSafari := or (.Site.Params.faviconique.use_cdn_safari) (eq (.Site.Params.faviconique_use_cdn_safari) true) -}}
-
-<!-- Default: SOLID favicon (previous plugin behavior) -->
-{{ with resources.Get "images/favicon.png" }}
-  {{ with .Resize (printf "64x64 png %s" $background_color) }}
-    <link rel="icon" href="{{ .RelPermalink }}" sizes="64x64" type="image/png" id="favicon-solid-64">
-  {{ end }}
-{{ end }}
-{{ with resources.Get "images/favicon.svg" | resources.ExecuteAsTemplate "images/favicon.svg" . }}
-  <link rel="icon" href="{{ .RelPermalink }}" sizes="any" type="image/svg+xml" id="favicon-svg">
-{{ end }}
-<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="{{ $maskColor }}">
-
 {{ if $useCdnSafari }}
-<script>
+<script data-cfasync="false" type="text/javascript">
 (function(){
   try {
+    // Debug hint: remove next line after verification
+    console.log("[faviconique] Safari-only CDN script injected");
+
     var ua = navigator.userAgent || "";
-    var isSafari = (/^((?!chrome|android|crios|fxios|edgios).)*safari/i).test(ua)
-                   || (navigator.vendor && /Apple/i.test(navigator.vendor) && !(/CriOS|FxiOS|EdgiOS/i).test(ua));
+    var isAppleVendor = navigator.vendor && /Apple/i.test(navigator.vendor);
+    var isSafariUA = (/^((?!chrome|android|crios|fxios|edgios).)*safari/i).test(ua);
+    var isSafari = isAppleVendor || isSafariUA || (window.safari && window.safari.pushNotification);
     if (!isSafari) return; // only switch on Safari
 
-    var head = document.getElementsByTagName('head')[0];
-    // Remove existing icon links (keep mask-icon)
-    var links = head.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]');
-    links.forEach(function(l){ head.removeChild(l); });
+    var head = document.head || document.getElementsByTagName('head')[0];
+    if (!head) return;
 
+    // Remove existing icon links (keep mask-icon)
+    head.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="shortcut icon"]').forEach(function(l){
+      head.removeChild(l);
+    });
+
+    // Cache-buster to avoid stubborn favicon caching in Safari
+    var cacheBuster = '&v={{ now.Unix }}';
     var base = '{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=';
+
     function add(rel, sizes, href){
       var link = document.createElement('link');
       link.setAttribute('rel', rel);
       if (sizes) link.setAttribute('sizes', sizes);
-      link.setAttribute('href', href);
-      if (rel === 'icon') link.setAttribute('type','image/png');
+      link.setAttribute('href', href + cacheBuster);
+      if (rel === 'icon' || rel === 'shortcut icon') link.setAttribute('type','image/png');
       head.appendChild(link);
     }
+
+    // Standard favicon sizes
     add('icon','16x16', base + '16');
     add('icon','32x32', base + '32');
     add('icon','48x48', base + '48');
     add('icon','96x96', base + '96');
+
+    // Some setups still look for shortcut icon
+    add('shortcut icon','', base + '32');
+
+    // iOS home screen icon
     add('apple-touch-icon','180x180', base + '180');
-  } catch(e) { /* fail silently */ }
+
+    console.log("[faviconique] Safari icons swapped to CDN emoji");
+  } catch(e) {
+    console && console.warn && console.warn('[faviconique] error', e);
+  }
 })();
 </script>
-{{ end }}
-
-<link rel="EditURI" type="application/rsd+xml" href="{{ "rsd.xml" | absURL }}">
-<link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
-<link rel="token_endpoint" href="https://micro.blog/indieauth/token">
-<link rel="subscribe" href="https://micro.blog/users/follow">
-<link rel="webmention" href="https://micro.blog/webmention">
-<link rel="micropub" href="https://micro.blog/micropub">
-<link rel="microsub" href="https://micro.blog/microsub">
-
-<link rel="stylesheet" href="{{ "custom.css" | relURL }}?{{ .Site.Params.theme_seconds }}">
-
-{{ range .Site.Params.plugins_css }}
-  <link rel="stylesheet" href="{{ . }}">
-{{ end }}
-
-{{ range $filename := .Site.Params.plugins_html }}
-  {{ partial $filename $ }}
 {{ end }}
