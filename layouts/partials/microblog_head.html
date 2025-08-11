@@ -1,81 +1,32 @@
-{{/* =====================
-   Faviconique+ — Head hook
-   Default: Emoji/Solid per plugin (all browsers)
-   Optional: Safari-only CDN PNGs when enabled
-   ===================== */}}
+{{/* =====================================
+   Faviconique+ — EmojiCDN everywhere
+   Always use PNGs from the emoji CDN in all browsers
+   Params used (with fallbacks):
+     - params.faviconique.emoji or params.faviconique_emoji
+     - params.faviconique.style or params.faviconique_style (default: "apple")
+     - params.faviconique.cdn or params.faviconique_cdn (default: https://emojicdn.elk.sh)
+     - params.faviconique.maskColor or params.faviconique_mask_color (default: #000000)
+   ===================================== */}}
 
 {{- $p := .Site.Params -}}
-{{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) -}}
+{{- $emoji := (or ($p.faviconique.emoji) ($p.faviconique_emoji)) | default "🌝" -}}
 {{- $style := (or ($p.faviconique.style) ($p.faviconique_style)) | default "apple" -}}
 {{- $cdn := (or ($p.faviconique.cdn) ($p.faviconique_cdn)) | default "https://emojicdn.elk.sh" -}}
 {{- $maskColor := (or ($p.faviconique.maskColor) ($p.faviconique_mask_color)) | default "#000000" -}}
-{{- $bg := (or $p.faviconique_background_color "transparent") -}}
-{{- $useCdnSafari := or ($p.faviconique.use_cdn_safari) (eq ($p.faviconique_use_cdn_safari) true) -}}
+{{- $v := printf "&v=%d" now.Unix -}}
+{{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
 
-{{/* ---- Default output (keeps normal plugin behavior) ---- */}}
-{{ if $emoji }}
-  {{/* SVG favicon based on the emoji (modern browsers) */}}
-  {{ with resources.Get "images/favicon.svg" | resources.ExecuteAsTemplate "images/favicon.svg" . }}
-    <link rel="icon" href="{{ .RelPermalink }}" sizes="any" type="image/svg+xml">
-  {{ end }}
-  {{/* PNG fallback (64x64) with optional background (Safari still shows PNG if CDN not used) */}}
-  {{ with resources.Get "images/favicon.png" }}
-    {{ with .Resize (printf "64x64 png %s" $bg) }}
-      <link rel="icon" href="{{ .RelPermalink }}" sizes="64x64" type="image/png">
-    {{ end }}
-  {{ end }}
-{{ else }}
-  {{/* Solid color only: use base PNG and tint via background color */}}
-  {{ with resources.Get "images/favicon.png" }}
-    {{ with .Resize (printf "64x64 png %s" $bg) }}
-      <link rel="icon" href="{{ .RelPermalink }}" sizes="64x64" type="image/png">
-    {{ end }}
-  {{ end }}
-{{ end }}
+{{/* Preconnect to speed up icon fetch */}}
+<link rel="preconnect" href="{{ $cdn }}">
+<link rel="dns-prefetch" href="{{ $cdn }}">
 
+{{/* PNG icons from CDN (all browsers) */}}
+<link rel="icon" type="image/png" sizes="16x16" href="{{ $base }}16{{ $v }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ $base }}32{{ $v }}">
+<link rel="icon" type="image/png" sizes="48x48" href="{{ $base }}48{{ $v }}">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ $base }}96{{ $v }}">
+<link rel="shortcut icon" type="image/png" href="{{ $base }}32{{ $v }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ $base }}180{{ $v }}">
+
+{{/* Optional: keep mask icon for Safari pinned tabs */}}
 <link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="{{ $maskColor }}">
-
-{{/* ---- Safari-only CDN swap (optional) ---- */}}
-{{ if $useCdnSafari }}
-<script data-cfasync="false" type="text/javascript">
-(function(){
-  try {
-    var ua = navigator.userAgent || "";
-    var isAppleVendor = navigator.vendor && /Apple/i.test(navigator.vendor);
-    var isSafariUA = (/^((?!chrome|android|crios|fxios|edgios).)*safari/i).test(ua);
-    var isSafari = isAppleVendor || isSafariUA || (window.safari && window.safari.pushNotification);
-    if (!isSafari) return; // only Safari
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-    if (!head) return;
-
-    // Remove existing icons (keep mask-icon)
-    head.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="shortcut icon"]').forEach(function(l){
-      head.removeChild(l);
-    });
-
-    var cacheBuster = '&v={{ now.Unix }}';
-    var base = '{{ $cdn }}/{{ $emoji | default "🍋" }}?style={{ $style }}&size=';
-
-    function add(rel, sizes, href){
-      var link = document.createElement('link');
-      link.setAttribute('rel', rel);
-      if (sizes) link.setAttribute('sizes', sizes);
-      link.setAttribute('href', href + cacheBuster);
-      if (rel === 'icon' || rel === 'shortcut icon') link.setAttribute('type','image/png');
-      head.appendChild(link);
-    }
-
-    // Standard sizes + iOS apple-touch-icon
-    add('icon','16x16', base + '16');
-    add('icon','32x32', base + '32');
-    add('icon','48x48', base + '48');
-    add('icon','96x96', base + '96');
-    add('shortcut icon','', base + '32');
-    add('apple-touch-icon','180x180', base + '180');
-  } catch(e) {
-    if (window.console && console.warn) console.warn('[faviconique] error', e);
-  }
-})();
-</script>
-{{ end }}
