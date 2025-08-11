@@ -5,6 +5,7 @@
     "faviconique_emoji": "🌝",
     "faviconique_dark_emoji": "🌚",
     "faviconique_use_dark_mode": true,
-    "faviconique_use_transparent_background": true
+    "faviconique_use_transparent_background": true,
+    "faviconique_style": "apple"
   }
 }
