@@ -1,63 +1,59 @@
-<h1><img src="https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/faviconique.png" width="48" height="48" alt="" align="left">&nbsp;Faviconique</h1>
+# Faviconique+
 
-Give your blog a personal touch with a custom favicon. [See it in action on Sven's blog](https://dahlstrand.net/).
+**Turn a single emoji into a cross‑browser favicon – no image export, no build steps.**
 
-![](https://raw.githubusercontent.com/svendahlstrand/plugin-faviconique/main/docs/favicon-examples.png)
+Faviconique+ is a Micro.blog plug‑in that takes one emoji and serves it as PNG favicons via **EmojiCDN**. It also provides an Apple touch icon, optional standalone (full‑screen) mode, and a configurable browser UI color. Works in Safari, Chrome, Firefox, Edge — **no local image generation** needed.
 
-> Choose a solid background color and/or an emoji to represent your blog as a favicon.
+> Credits: Inspired by the original [Faviconique](https://micro.blog/account/plugins/view/141) by Sven Dahlstrand. This plug‑in focuses on emoji-only favicons via a CDN and adds a few Micro.blog‑specific quality‑of‑life options.
 
-[Follow @sod on Micro.blog](https://micro.blog/sod) for updates on this plug-in.
+---
 
-## Love Faviconique? Your support helps me keep creating!
+## Features
 
-Hey! It's me, Sven. Faviconique and my other plug-ins are passion projects released to the world for free. That said, donations are always welcome if you get value from my work.
+- 🦄 **Emoji → favicon (PNG via CDN)**
+  - Styles: **Apple**, **Twitter (Twemoji)**, **Facebook**, **Google**
+- 📐 **Multiple sizes out of the box**
+  - 16×16, 32×32, 48×48, 96×96, 192×192, 512×512
+  - Plus **Apple touch icon** 180×180
+- 🚀 **Fast loading**
+  - `preconnect` + `dns-prefetch` to EmojiCDN
+  - Cache‑buster on URLs to avoid stale favicons
+- 🏷️ **Configurable names** for home‑screen/app surfaces
+  - Sets `apple-mobile-web-app-title` and `application-name`
+- 🧭 **Optional full‑screen (standalone) mode**
+  - Adds `apple-mobile-web-app-capable` and `mobile-web-app-capable` when enabled
+- 🎨 **Theme color** for browser UI (Android/desktop browsers, Windows tiles)
+  - Sets `theme-color` and `msapplication-TileColor`
+- 🔧 **Zero local processing** – everything via CDN
 
-[💸 Donate $10](https://dahlstrand.net/donate/) or any amount you're comfortable with. Thanks! 🙏
+---
 
-## Here's what Faviconique can do
+## Configure
 
-* 🟦 Solid color favicons
-* 🦖 Emoji favicons (with an optional solid background color)
-* 🌙 With support for dark mode
+Fields in **Plugins → Faviconique+ → Settings**:
 
-## Get started
+- **Emoji (only one)** – e.g. `🌱` *(required)*
+- **Emoji style** – `apple`, `twitter`, `facebook`, or `google` *(required)*
+- **Home screen title (optional)** – overrides the saved shortcut/app name
+- **Enable standalone (full screen) mode** – toggles iOS/Android standalone meta tags
+- **Theme color for browser UI** – used for `theme-color` and Windows tiles
 
-Ready to give your blog a personal touch? Faviconique is available in the official directory and should be easy to install.
+> Tip: Placeholders in the UI are **not** saved values. Enter your own values and click **Update Settings**.
 
-### Install the plug-in
+---
 
-1. Find [Faviconique in the plug-in directory](https://micro.blog/account/plugins/view/141).
-2. Choose the site you want to install the plug-in to.
-3. Press *Install*.
-4. Congratulations! You've successfully installed the plug-in.
+## How it works
 
-### Customize your favicon
+- The plug‑in builds favicon URLs like:
+  ```
+  https://emojicdn.elk.sh/<emoji>?style=<style>&size=<N>&v=<timestamp>
+  ```
+- Browsers receive raster PNGs for each declared size. Safari gets a standard Apple touch icon (180×180).
+- The CDN host is fixed to **emojicdn.elk.sh** for simplicity and reliability.
 
-1. Go to *Plug-ins* and press ⚙️ *Settings* (next to the Faviconique plug-in).
-2. Pick a *Background color*.
-3. Type exactly one emoji into the *Emoji* text field.
-4. Choose a *Dark mode background color* and *Dark mode emoji*.
-5. Hit *Update Settings*.
+---
 
-Dark mode is optional; uncheck *Enable dark mode, please* if you prefer not to use it. The *Use transparent background for emoji* option does exactly what it says.
+## License & credits
 
-### Go check out your new favicon
-
-When the settings are to your liking, visit your blog to see your new favicon. It may take a while, a couple of minutes or so, before it shows up. If it doesn't show, try making a hard refresh and emptying your browser cache.
-
-## What about browser support?
-
-Most browsers have full support for favicons, but there's one notable exception: Safari on Apple devices. People visiting your blog using Safari will always get a solid square with the color you've chosen.
-
-| Browser 	| Solid color 	| Emoji 	| Dark mode 	|
-|---------	|-------------	|-------	|-----------	|
-| Firefox 	| ✅           	| ✅     	| ✅         	|
-| Safari  	| ✅           	| ❌     	| ❌         	|
-| Edge    	| ✅           	| ✅     	| ✅         	|
-| Chrome  	| ✅           	| ✅     	| ✅         	|
-
-Curious about Safari's limitations? Check out [my notes on its lack of SVG favicon support](https://dahlstrand.net/december-adventure/#day-6).
-
-## Having troubles?
-
-Feel free to [reach out to @sod on Micro.blog](https://micro.blog/sod) for additional help.
+- © Contributors of Faviconique+. Credits to [Sven Dahlstrand](https://dahlstrand.net/) for the original Faviconique idea and assets.
+- Emoji rendering provided by **EmojiCDN (elk.sh)**.
