@@ -32,6 +32,11 @@
       "field": "params.faviconique_use_transparent_background",
       "label": "Use transparent background for emoji",
       "type": "boolean"
+    },
+    {
+      "field": "params.faviconique_use_cdn_safari",
+      "label": "Use emoji CDN for Safari only",
+      "type": "boolean"
     }
   ]
 }
