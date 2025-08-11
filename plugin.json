@@ -1,20 +1,20 @@
 {
-  "version": "0.0.7",
+  "version": "0.0.8",
   "title": "Faviconique+",
   "description": "Give your blog a personal touch with a custom favicon, also for Safari :)",
   "fields": [
     {
-      "field": "params.faviconique_background_color",
+      "field": "params.faviconique.background_color",
       "label": "Background color",
       "type": "color"
     },
     {
-      "field": "params.faviconique_emoji",
+      "field": "params.faviconique.emoji",
       "label": "Emoji (only one)",
       "type": "string"
     },
     {
-      "field": "params.faviconique_style",
+      "field": "params.faviconique.style",
       "label": "Emoji style (CDN)",
       "type": "select",
       "options": [
@@ -37,22 +37,22 @@
       ]
     },
     {
-      "field": "params.faviconique_dark_background_color",
+      "field": "params.faviconique.dark_background_color",
       "label": "Dark mode background color",
       "type": "color"
     },
     {
-      "field": "params.faviconique_dark_emoji",
+      "field": "params.faviconique.dark_emoji",
       "label": "Dark mode emoji (only one)",
       "type": "string"
     },
     {
-      "field": "params.faviconique_use_dark_mode",
+      "field": "params.faviconique.use_dark_mode",
       "label": "Enable dark mode, please",
       "type": "boolean"
     },
     {
-      "field": "params.faviconique_use_transparent_background",
+      "field": "params.faviconique.use_transparent_background",
       "label": "Use transparent background for emoji",
       "type": "boolean"
     }
