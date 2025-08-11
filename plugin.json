@@ -1,23 +1,26 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Faviconique+",
   "description": "Emoji favicon via EmojiCDN for all browsers.",
   "fields": [
     {
-      "field": "params.faviconique.emoji",
-      "label": "Emoji (only one)",
-      "type": "string"
+      "type": "text",
+      "key": "faviconique_emoji",
+      "name": "Emoji (only one)",
+      "default": "🌱",
+      "placeholder": "🌱"
     },
     {
-      "field": "params.faviconique.style",
-      "label": "Emoji style (CDN)",
       "type": "select",
+      "key": "faviconique_style",
+      "name": "Emoji style (CDN)",
       "options": [
-        { "label": "apple", "value": "apple" },
-        { "label": "twitter", "value": "twitter" },
-        { "label": "facebook", "value": "facebook" },
-        { "label": "google", "value": "google" }
-      ]
+        {"name":"Apple","value":"apple"},
+        {"name":"Twitter","value":"twitter"},
+        {"name":"Facebook","value":"facebook"},
+        {"name":"Google","value":"google"}
+      ],
+      "default": "apple"
     }
   ]
 }
