@@ -1,25 +1,29 @@
+{{/* Immer normale Faviconique-Links rendern */}}
+<link rel="icon" type="image/png" sizes="16x16" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=16">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=32">
+<link rel="icon" type="image/png" sizes="48x48" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=48">
+<link rel="icon" type="image/png" sizes="96x96" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=96">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=180">
+<link rel="shortcut icon" type="image/png" href="{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=32">
+
 {{ if $useCdnSafari }}
 <script data-cfasync="false" type="text/javascript">
 (function(){
   try {
-    // Debug hint: remove next line after verification
-    console.log("[faviconique] Safari-only CDN script injected");
-
     var ua = navigator.userAgent || "";
     var isAppleVendor = navigator.vendor && /Apple/i.test(navigator.vendor);
     var isSafariUA = (/^((?!chrome|android|crios|fxios|edgios).)*safari/i).test(ua);
     var isSafari = isAppleVendor || isSafariUA || (window.safari && window.safari.pushNotification);
-    if (!isSafari) return; // only switch on Safari
+    if (!isSafari) return;
 
     var head = document.head || document.getElementsByTagName('head')[0];
     if (!head) return;
 
-    // Remove existing icon links (keep mask-icon)
+    // Alle bisherigen Icons entfernen
     head.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="shortcut icon"]').forEach(function(l){
       head.removeChild(l);
     });
 
-    // Cache-buster to avoid stubborn favicon caching in Safari
     var cacheBuster = '&v={{ now.Unix }}';
     var base = '{{ $cdn }}/{{ $emoji }}?style={{ $style }}&size=';
 
@@ -32,19 +36,12 @@
       head.appendChild(link);
     }
 
-    // Standard favicon sizes
     add('icon','16x16', base + '16');
     add('icon','32x32', base + '32');
     add('icon','48x48', base + '48');
     add('icon','96x96', base + '96');
-
-    // Some setups still look for shortcut icon
     add('shortcut icon','', base + '32');
-
-    // iOS home screen icon
     add('apple-touch-icon','180x180', base + '180');
-
-    console.log("[faviconique] Safari icons swapped to CDN emoji");
   } catch(e) {
     console && console.warn && console.warn('[faviconique] error', e);
   }
