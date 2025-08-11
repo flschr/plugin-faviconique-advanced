@@ -5,7 +5,9 @@
 
 {{- $emoji := (or (index $p "faviconique_emoji") (index $me "faviconique_emoji") (index $group "emoji")) | default "🌱" -}}
 {{- $style := (or (index $p "faviconique_style") (index $me "faviconique_style") (index $group "style")) | default "apple" -}}
-{{- $cdn := (or (index $p "faviconique_cdn") (index $me "faviconique_cdn") (index $group "cdn")) | default "https://emojicdn.elk.sh" -}}
+{{- $cdn := "https://emojicdn.elk.sh" -}}
+{{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
+{{- $capable := (or (index $p "faviconique_webapp_capable") (index $me "faviconique_webapp_capable") (index $group "webapp_capable") ) -}}
 {{- $v := printf "&v=%d" now.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
 
@@ -21,6 +23,9 @@
 <link rel="shortcut icon" type="image/png" href="{{$base}}32{{$v}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{$base}}180{{$v}}">
 
-{{- with .Site.Title }}
-<meta name="apple-mobile-web-app-title" content="{{ . }}">
+<meta name="apple-mobile-web-app-title" content="{{ $title }}">
+<meta name="application-name" content="{{ $title }}">
+{{- if $capable }}
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 {{- end }}

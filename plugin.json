@@ -1,25 +1,27 @@
 {
-  "version": "0.1.5",
+  "version": "0.1.7",
   "title": "Faviconique+",
   "description": "Emoji favicon via EmojiCDN for all browsers.",
   "fields": [
     {
       "field": "params.faviconique_emoji",
       "label": "Emoji (only one)",
-      "type": "string",
-      "placeholder": "🌱"
+      "type": "string"
     },
     {
       "field": "params.faviconique_style",
       "label": "Emoji style (apple / twitter / facebook / google)",
-      "type": "string",
-      "placeholder": "apple"
+      "type": "string"
     },
     {
-      "field": "params.faviconique_cdn",
-      "label": "Emoji CDN (optional)",
-      "type": "string",
-      "placeholder": "https://emojicdn.elk.sh"
+      "field": "params.faviconique_title",
+      "label": "Home screen title (optional)",
+      "type": "string"
+    },
+    {
+      "field": "params.faviconique_webapp_capable",
+      "label": "Enable standalone (full screen) mode",
+      "type": "boolean"
     }
   ]
 }
