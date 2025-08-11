@@ -1,5 +1,5 @@
 {
-  "version": "0.1.7",
+  "version": "0.1.8",
   "title": "Faviconique+",
   "description": "Emoji favicon via EmojiCDN for all browsers.",
   "fields": [
@@ -16,11 +16,18 @@
     {
       "field": "params.faviconique_title",
       "label": "Home screen title (optional)",
-      "type": "string"
+      "type": "string",
+      "placeholder": ""
+    },
+    {
+      "field": "params.faviconique_theme_color",
+      "label": "Theme color for fullscreen browser app",
+      "type": "color",
+      "placeholder": "#000000"
     },
     {
       "field": "params.faviconique_webapp_capable",
-      "label": "Enable standalone (full screen) mode",
+      "label": "Enable standalone (full screen) app mode",
       "type": "boolean"
     }
   ]
