@@ -9,7 +9,7 @@
 {{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
 {{- $capable := (or (index $p "faviconique_webapp_capable") (index $me "faviconique_webapp_capable") (index $group "webapp_capable") ) -}}
 {{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color") ) | default "#000000" -}}
-{{- $v := printf "&v=%d" now.Unix -}}
+{{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
 
 <link rel="preconnect" href="{{$cdn}}" crossorigin>
