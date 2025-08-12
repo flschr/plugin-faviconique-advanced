@@ -2,7 +2,7 @@
 {{- $emoji := (index $p "faviconique_emoji") | default "🌱" -}}
 {{- $style := (index $p "faviconique_style") | default "apple" -}}
 {{- $title := (index $p "faviconique_title") | default .Site.Title -}}
-{{- $theme := (index $p "faviconique_theme_color") | default "#000000" -}}
+{{- $theme := (index $p "faviconique_theme_color") | default "" -}}
 {{- $display := (index $p "faviconique_display") | default "standalone" -}}
 {{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
@@ -27,6 +27,7 @@
 {{- end }}
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
-{{- if ne $theme "#000000" }}
+{{- if $theme }}
 <meta name="theme-color" content="{{ $theme }}">
 <meta name="msapplication-TileColor" content="{{ $theme }}">
+{{- end }}
