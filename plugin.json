@@ -1,7 +1,7 @@
 {
-  "version": "0.1.8",
+  "version": "0.2.0",
   "title": "Faviconique+",
-  "description": "Emoji favicon via EmojiCDN for all browsers.",
+  "description": "Emoji favicon via EmojiCDN with web app manifest for installs.",
   "fields": [
     {
       "field": "params.faviconique_emoji",
@@ -21,14 +21,9 @@
     },
     {
       "field": "params.faviconique_theme_color",
-      "label": "Theme color for fullscreen browser app",
+      "label": "Theme color for browser UI",
       "type": "color",
       "placeholder": "#000000"
-    },
-    {
-      "field": "params.faviconique_webapp_capable",
-      "label": "Enable standalone (full screen) app mode",
-      "type": "boolean"
     }
   ]
 }
