@@ -45,6 +45,9 @@ Fields in **Plugins → Faviconique+ → Settings**:
 ## Add to Home Screen
 
 Once configured, visit your site on a mobile browser and use **Add to Home Screen**. The generated `manifest.webmanifest` and optional iOS meta tags launch in your chosen display mode with the selected emoji icon and theme color.
+=======
+Once configured, visit your site on a mobile browser and use **Add to Home Screen**. The generated `manifest.webmanifest` and iOS
+meta tags enable a standalone launch with your chosen emoji icon and theme color.
 
 ---
 

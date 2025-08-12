@@ -10,8 +10,9 @@
     },
     {
       "field": "params.faviconique_style",
-      "label": "Emoji style (apple / twitter / facebook / google)",
-      "type": "string"
+      "label": "Emoji style",
+      "type": "select",
+      "options": ["apple", "twitter", "facebook", "google"]
     },
     {
       "field": "params.faviconique_title",

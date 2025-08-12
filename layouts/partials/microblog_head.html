@@ -5,8 +5,8 @@
 {{- $theme := (index $p "faviconique_theme_color") | default "#000000" -}}
 {{- $display := (index $p "faviconique_display") | default "standalone" -}}
 {{- $cdn := "https://emojicdn.elk.sh" -}}
-{{- $v := printf "&v=%d" now.Unix -}}
-{{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
+{{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
+{{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) (urlquery $style) -}}
 
 <link rel="preconnect" href="{{$cdn}}" crossorigin>
 <link rel="dns-prefetch" href="{{$cdn}}">
@@ -27,5 +27,6 @@
 {{- end }}
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
+{{- if ne $theme "#000000" }}
 <meta name="theme-color" content="{{ $theme }}">
 <meta name="msapplication-TileColor" content="{{ $theme }}">
