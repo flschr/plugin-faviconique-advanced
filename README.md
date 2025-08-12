@@ -16,7 +16,7 @@ Faviconique+ is a Micro.blog plug‑in that takes one emoji and serves it as PNG
   - 16×16, 32×32, 48×48, 96×96, 192×192, 512×512
   - Plus **Apple touch icon** 180×180
 - 📱 **Add to Home Screen**
-  - Web App Manifest + iOS meta tags for app‑like launch
+  - Web App Manifest + optional iOS meta tags for app‑like launch
 - 🚀 **Fast loading**
   - `preconnect` + `dns-prefetch` to EmojiCDN
   - Cache‑buster on URLs to avoid stale favicons
@@ -36,6 +36,7 @@ Fields in **Plugins → Faviconique+ → Settings**:
 - **Emoji style** – `apple`, `twitter`, `facebook`, or `google` *(required)*
 - **Home screen title (optional)** – overrides the saved shortcut/app name
 - **Theme color for browser UI** – used for `theme-color` and Windows tiles
+- **Web app display (`standalone` or `browser`)** – choose `standalone` for an app‑like window or `browser` for a normal tab
 
 > Tip: Placeholders in the UI are **not** saved values. Enter your own values and click **Update Settings**.
 
@@ -43,6 +44,8 @@ Fields in **Plugins → Faviconique+ → Settings**:
 
 ## Add to Home Screen
 
+Once configured, visit your site on a mobile browser and use **Add to Home Screen**. The generated `manifest.webmanifest` and optional iOS meta tags launch in your chosen display mode with the selected emoji icon and theme color.
+=======
 Once configured, visit your site on a mobile browser and use **Add to Home Screen**. The generated `manifest.webmanifest` and iOS
 meta tags enable a standalone launch with your chosen emoji icon and theme color.
 
