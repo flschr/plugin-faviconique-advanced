@@ -6,7 +6,7 @@
 {{- $emoji := (or (index $p "faviconique_emoji") (index $me "faviconique_emoji") (index $group "emoji")) | default "🌱" -}}
 {{- $style := (or (index $p "faviconique_style") (index $me "faviconique_style") (index $group "style")) | default "apple" -}}
 {{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
-{{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color")) | default "#000000" -}}
+{{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color")) | default "" -}}
 {{- $display := (or (index $p "faviconique_display") (index $me "faviconique_display") (index $group "display")) | default "standalone" -}}
 {{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
@@ -14,7 +14,6 @@
 
 <link rel="preconnect" href="{{$cdn}}" crossorigin>
 <link rel="dns-prefetch" href="{{$cdn}}">
-
 <link rel="icon" type="image/png" sizes="16x16" href="{{$base}}16{{$v}}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{$base}}32{{$v}}">
 <link rel="icon" type="image/png" sizes="48x48" href="{{$base}}48{{$v}}">
@@ -31,8 +30,7 @@
 {{- end }}
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
-{{- if ne $theme "#000000" }}
+{{- if $theme }}
 <meta name="theme-color" content="{{ $theme }}">
 <meta name="msapplication-TileColor" content="{{ $theme }}">
 {{- end }}
-
