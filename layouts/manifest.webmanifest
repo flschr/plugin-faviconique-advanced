@@ -1,0 +1,29 @@
+{{- $p := .Site.Params -}}
+{{- $emoji := (index $p "faviconique_emoji") | default "🌱" -}}
+{{- $style := (index $p "faviconique_style") | default "apple" -}}
+{{- $title := (index $p "faviconique_title") | default .Site.Title -}}
+{{- $theme := (index $p "faviconique_theme_color") | default "#000000" -}}
+{{- $display := (index $p "faviconique_display") | default "standalone" -}}
+{{- $cdn := "https://emojicdn.elk.sh" -}}
+{{- $v := printf "&v=%d" now.Unix -}}
+{{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
+{
+  "name": "{{ $title }}",
+  "short_name": "{{ $title }}",
+  "start_url": "/",
+  "display": "{{ $display }}",
+  "background_color": "{{ $theme }}",
+  "theme_color": "{{ $theme }}",
+  "icons": [
+    {
+      "src": "{{ $base }}192{{ $v }}",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "{{ $base }}512{{ $v }}",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
