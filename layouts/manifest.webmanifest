@@ -1,0 +1,32 @@
+{{- $p := .Site.Params -}}
+{{- $plugins := (index $p "plugins") | default dict -}}
+{{- $me := (index $plugins "plugin-faviconique-plus") | default dict -}}
+{{- $group := (index $p "faviconique") | default dict -}}
+
+{{- $emoji := (or (index $p "faviconique_emoji") (index $me "faviconique_emoji") (index $group "emoji")) | default "🌱" -}}
+{{- $style := (or (index $p "faviconique_style") (index $me "faviconique_style") (index $group "style")) | default "apple" -}}
+{{- $cdn := "https://emojicdn.elk.sh" -}}
+{{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
+{{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color")) | default "#000000" -}}
+{{- $v := printf "&v=%d" now.Unix -}}
+{{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) $style -}}
+{
+  "name": "{{ $title }}",
+  "short_name": "{{ $title }}",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "{{ $theme }}",
+  "theme_color": "{{ $theme }}",
+  "icons": [
+    {
+      "src": "{{ $base }}192{{ $v }}",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "{{ $base }}512{{ $v }}",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

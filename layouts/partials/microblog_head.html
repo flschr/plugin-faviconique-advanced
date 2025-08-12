@@ -7,7 +7,6 @@
 {{- $style := (or (index $p "faviconique_style") (index $me "faviconique_style") (index $group "style")) | default "apple" -}}
 {{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
-{{- $capable := (or (index $p "faviconique_webapp_capable") (index $me "faviconique_webapp_capable") (index $group "webapp_capable") ) -}}
 {{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color") ) | default "#000000" -}}
 {{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) (urlquery $style) -}}
@@ -23,13 +22,15 @@
 <link rel="icon" type="image/png" sizes="512x512" href="{{$base}}512{{$v}}">
 <link rel="shortcut icon" type="image/png" href="{{$base}}32{{$v}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{$base}}180{{$v}}">
+<link rel="manifest" href="{{ "manifest.webmanifest" | relURL }}">
 
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
 {{- if ne $theme "#000000" }}
 <meta name="theme-color" content="{{ $theme }}">
 <meta name="msapplication-TileColor" content="{{ $theme }}">
-{{- end }}
 {{- if $capable }}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
