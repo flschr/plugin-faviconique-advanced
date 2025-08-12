@@ -26,8 +26,10 @@
 
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
+{{- if ne $theme "#000000" }}
 <meta name="theme-color" content="{{ $theme }}">
 <meta name="msapplication-TileColor" content="{{ $theme }}">
+{{- end }}
 {{- if $capable }}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
