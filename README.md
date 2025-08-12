@@ -36,7 +36,7 @@ Fields in **Plugins → Faviconique+ → Settings**:
 - **Emoji style** – `apple`, `twitter`, `facebook`, or `google` *(required)*
 - **Home screen title (optional)** – overrides the saved shortcut/app name
 - **Theme color for browser UI** – used for `theme-color` and Windows tiles
-- **Web app display (standalone or browser)** – choose `standalone` for an app‑like window or `browser` for a normal tab
+- **Web app display (`standalone` or `browser`)** – choose `standalone` for an app‑like window or `browser` for a normal tab
 
 > Tip: Placeholders in the UI are **not** saved values. Enter your own values and click **Update Settings**.
 
