@@ -15,8 +15,6 @@ Faviconique+ is a Micro.blog plug‑in that takes one emoji and serves it as PNG
 - 📐 **Multiple sizes out of the box**
   - 16×16, 32×32, 48×48, 96×96, 192×192, 512×512
   - Plus **Apple touch icon** 180×180
-- 📱 **Add to Home Screen**
-  - Web App Manifest for a home‑screen icon and theme color
 - 🚀 **Fast loading**
   - `preconnect` + `dns-prefetch` to EmojiCDN
   - Cache‑buster on URLs to avoid stale favicons
@@ -24,8 +22,7 @@ Faviconique+ is a Micro.blog plug‑in that takes one emoji and serves it as PNG
   - Sets `apple-mobile-web-app-title` and `application-name`
 - 🎨 **Theme color** for browser UI (Android/desktop browsers, Windows tiles)
   - Sets `theme-color` and `msapplication-TileColor`
-- 🔧 **Zero local processing** – everything via CDN
-
+  - 
 ---
 
 ## Configure
@@ -41,12 +38,6 @@ Fields in **Plugins → Faviconique+ → Settings**:
 
 ---
 
-## Add to Home Screen
-
-Once configured, visit your site on a mobile browser and use **Add to Home Screen**. The generated `manifest.webmanifest` launches in the browser with the selected emoji icon and theme color. The plug-in now ships with Hugo output settings that automatically generate `manifest.webmanifest` at the site root, so no additional configuration is required.
-
----
-
 ## How it works
 
 - The plug‑in builds favicon URLs like:
@@ -58,7 +49,6 @@ Once configured, visit your site on a mobile browser and use **Add to Home Scree
 
 ---
 
-## License & credits
+## 👤 Author
 
-- © Contributors of Faviconique+. Credits to [Sven Dahlstrand](https://dahlstrand.net/) for the original Faviconique idea and assets.
-- Emoji rendering provided by **EmojiCDN (elk.sh)**.
+René Fischer – https://fischr.org
