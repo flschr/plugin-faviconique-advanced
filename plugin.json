@@ -25,12 +25,6 @@
       "label": "Theme color for browser UI",
       "type": "color",
       "placeholder": "#000000"
-    },
-    {
-      "field": "params.faviconique_display",
-      "label": "Web app display (standalone or browser)",
-      "type": "string",
-      "placeholder": "standalone"
     }
   ]
 }
