@@ -7,7 +7,6 @@
 {{- $style := (or (index $p "faviconique_style") (index $me "faviconique_style") (index $group "style")) | default "apple" -}}
 {{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
 {{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color")) | default "" -}}
-{{- $display := (or (index $p "faviconique_display") (index $me "faviconique_display") (index $group "display")) | default "standalone" -}}
 {{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $v := printf "&v=%d" .Site.LastChange.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) (urlquery $style) -}}
@@ -23,11 +22,6 @@
 <link rel="shortcut icon" type="image/png" href="{{$base}}32{{$v}}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{$base}}180{{$v}}">
 <link rel="manifest" href="{{ "manifest.webmanifest" | relURL }}">
-
-{{- if eq $display "standalone" }}
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-{{- end }}
 <meta name="apple-mobile-web-app-title" content="{{ $title }}">
 <meta name="application-name" content="{{ $title }}">
 {{- if $theme }}

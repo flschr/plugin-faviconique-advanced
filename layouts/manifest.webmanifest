@@ -8,14 +8,12 @@
 {{- $cdn := "https://emojicdn.elk.sh" -}}
 {{- $title := (or (index $p "faviconique_title") (index $me "faviconique_title") (index $group "title") .Site.Title) -}}
 {{- $theme := (or (index $p "faviconique_theme_color") (index $me "faviconique_theme_color") (index $group "theme_color")) | default "#000000" -}}
-{{- $display := (or (index $p "faviconique_display") (index $me "faviconique_display") (index $group "display")) | default "standalone" -}}
 {{- $v := printf "&v=%d" now.Unix -}}
 {{- $base := printf "%s/%s?style=%s&size=" $cdn (urlquery $emoji) (urlquery $style) -}}
 {
   "name": "{{ $title }}",
   "short_name": "{{ $title }}",
   "start_url": "/",
-  "display": "{{ $display }}",
   "background_color": "{{ $theme }}",
   "theme_color": "{{ $theme }}",
   "icons": [
